@@ -4,14 +4,22 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/levicook/go-detect"
 )
+
+var port string
+
+func init() {
+	port = detect.String(os.Getenv("PORT"), "5000")
+}
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "hello")
 	})
 
-	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		panic(err)
 	}
 }
