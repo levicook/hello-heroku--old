@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-
-	"github.com/levicook/go-detect"
 )
 
 var port string
 
 func init() {
-	port = detect.String(os.Getenv("PORT"), "5000")
+	port = os.Getenv("PORT")
 }
 
 func main() {
